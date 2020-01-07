@@ -1,0 +1,77 @@
+.App {
+  .DataViz2019 {
+    font-family: monospace;
+    margin: 0px calc(33vw);
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    .fullHeightContainer {
+      display: inline-block;
+      height: calc(100vh);
+      overflow: scroll;
+      vertical-align: top;
+      width: 50%;
+    }
+
+    %yellow, .yellow {
+      background-color: yellow;
+    }
+
+    %black, .black {
+      background-color: black;
+      color: white;
+      font-weight: bold;
+    }
+
+    .Calendar, .Display {
+      padding: 120px 0px;
+    }
+
+    .Calendar {
+      cursor: default;
+      min-width: fit-content;
+
+      .Dot {
+        &.hoverable {
+          cursor: pointer;
+
+          &:hover {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    .Display {
+      hr {
+        border: 0.7px black solid;
+      }
+
+      .guestMoment {
+        cursor: pointer;
+
+        &:hover {
+          @extend %black;
+        }
+      }
+
+      .momentGuest {
+        cursor: pointer;
+        width: fit-content;
+      }
+
+      .close {
+        cursor: pointer;
+        margin-top: 10px;
+        width: fit-content;
+
+        &:hover {
+          @extend %yellow;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
