@@ -1,16 +1,17 @@
 .App {
   .DataViz2019 {
     font-family: monospace;
-    margin: 0px calc(33vw);
 
     ::-webkit-scrollbar {
       display: none;
     }
 
     .fullHeightContainer {
+      box-sizing: border-box;
       display: inline-block;
       height: calc(100vh);
       overflow: scroll;
+      padding: 30px;
       vertical-align: top;
       width: 50%;
     }
@@ -31,6 +32,7 @@
 
     .Calendar {
       cursor: default;
+      float: right;
       min-width: fit-content;
 
       .Dot {
@@ -47,10 +49,17 @@
     .Display {
       hr {
         border: 0.7px black solid;
+        width: 120px;
+        margin: 10px 0px;
+      }
+
+      ul {
+        padding-left: 1em;
       }
 
       .guestMoment {
         cursor: pointer;
+        width: fit-content;
 
         &:hover {
           @extend %black;
