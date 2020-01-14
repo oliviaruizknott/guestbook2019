@@ -44,7 +44,7 @@ class DataViz2019 extends Component {
   }
 
   setGuest() {
-    const name = this.props.match.params.name;
+    const name = this.props.location.hash.replace("#","");
     if (name) {
       const guests = this.state.guestsIndex;
       const guest = Object.keys(guests).find((guestId) => {
