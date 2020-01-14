@@ -15,8 +15,8 @@ class Calendar extends Component {
   }
 
   makeDates() {
-    const current = new Date("2019-1-1");
-    const end = new Date("2020-1-1");
+    const current = new Date(2019, 0, 1);
+    const end = new Date(2020, 0, 1);
     const dates = [];
 
     // Set the current date to be the Sunday before the new year.
