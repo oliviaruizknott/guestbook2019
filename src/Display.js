@@ -56,7 +56,7 @@ class Display extends Component {
     this.props.handlers.updateShowConnections(!this.props.appState.showConnections);
   }
 
-  isHovered(type, object) {
+  checkHighlight(type, object) {
     const appState = this.props.appState;
 
     if (type === GUEST) {
@@ -64,7 +64,10 @@ class Display extends Component {
     }
 
     if (type === MOMENT) {
-      return appState.momentsHovered && appState.momentsHovered.includes(object.id);
+      // A moment is highlighted if it’s hovered, or if a guest that was at this
+      // moment is hovered.
+      return (appState.momentsHovered && appState.momentsHovered.includes(object.id)) ||
+        (appState.guestHovered && appState.guestsIndex[appState.guestHovered].moment_ids.includes(object.id));
     }
   }
 
@@ -73,7 +76,7 @@ class Display extends Component {
       return guest.moments.map((moment) => {
         if (!moment) return null;
         const dateString = moment.date.toDateString().replace(' 2019', '');
-        const black = this.isHovered(MOMENT, moment) ? "black" : "";
+        const black = this.checkHighlight(MOMENT, moment) ? "black" : "";
 
         return (
           <li
@@ -111,7 +114,7 @@ class Display extends Component {
     if (moment.guests && moment.guests.length > 0) {
       return moment.guests.map((guest) => {
         if (!guest) return null;
-        const yellow = this.isHovered(GUEST, guest) ? "yellow" : "";
+        const yellow = this.checkHighlight(GUEST, guest) ? "yellow" : "";
         return (
           <li
             key={guest.id}

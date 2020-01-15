@@ -39,7 +39,7 @@ class Calendar extends Component {
     // For each date in state, make a dot; add moment data if applicable
     for (let date of this.state.dates) {
       const moments = this.findMoments(date);
-      const highlight = this.findHighlight(moments);
+      const highlight = this.checkHighlight(moments);
 
       dots.push(<Dot
         key={date.toString()}
@@ -75,11 +75,13 @@ class Calendar extends Component {
   }
 
   // returns "yellow" or "black" or ""
-  findHighlight(moments) {
+  checkHighlight(moments) {
     let highlight = "";
     const appState = this.props.appState;
-    const selectedGuest = appState.guestHovered || appState.guestClicked;
-    const guestMoments = selectedGuest && appState.guestsIndex[selectedGuest].moment_ids;
+    const clickedGuest = appState.guestsIndex[appState.guestClicked];
+    const hoveredGuest = appState.guestsIndex[appState.guestHovered];
+    const selectedGuest = clickedGuest || hoveredGuest;
+    const selectedGuestMoments = selectedGuest && selectedGuest.moment_ids;
 
     // The dot should be yellow if a moment that it represents is hovered or
     // clicked anywhere; or if a moment that it represents is included in the
@@ -87,7 +89,7 @@ class Calendar extends Component {
     if (
       this.includesMoments(moments, appState.momentsHovered) ||
       this.includesMoments(moments, appState.momentsClicked) ||
-      this.includesMoments(moments, guestMoments)
+      this.includesMoments(moments, selectedGuestMoments)
     ) {
       highlight = "yellow";
     }
@@ -96,11 +98,26 @@ class Calendar extends Component {
     // The dot should be black if a guest is clicked and a guest moment is
     // hovered.
     if (
-      appState.guestClicked &&
+      clickedGuest &&
       this.includesMoments(moments, appState.momentsHovered) &&
-      this.includesMoments(moments, guestMoments)
+      this.includesMoments(moments, selectedGuestMoments)
     ) {
       highlight = "black";
+    }
+
+    // GUEST CLICKED && GUEST HOVERED
+    // The dot should be black if a guest is clicked and the hovered connected
+    // guest shares a moment
+    if (clickedGuest && hoveredGuest) {
+      const connection = clickedGuest.connections.find((c) => {
+        return c.guestId === hoveredGuest.id;
+      });
+
+      const connectedMoments = connection.momentIds;
+
+      if (this.includesMoments(moments, connectedMoments)) {
+        highlight = "black";
+      }
     }
 
     return highlight;
