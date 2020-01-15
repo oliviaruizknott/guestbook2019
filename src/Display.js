@@ -14,6 +14,7 @@ class Display extends Component {
     this.handleMomentMouseEnter = this.handleMomentMouseEnter.bind(this);
     this.handleMomentMouseLeave = this.handleMomentMouseLeave.bind(this);
     this.handleMomentClick = this.handleMomentClick.bind(this);
+    this.handleConnectionsClick = this.handleConnectionsClick.bind(this);
   }
 
   handleCloseClick(e) {
@@ -48,6 +49,11 @@ class Display extends Component {
     this.props.handlers.updateMomentsClicked([parseInt(e.target.id)]);
     // Wipe out the hovered moment here or it will never happen
     this.props.handlers.updateMomentsHovered([]);
+  }
+
+  handleConnectionsClick(e) {
+    console.dir(this.props.guest.connections)
+    this.props.handlers.updateShowConnections(!this.props.appState.showConnections);
   }
 
   isHovered(type, object) {
@@ -92,6 +98,7 @@ class Display extends Component {
         <div>{guest.name}</div>
         <div>
           <div>Moments: {guest.moments.length}</div>
+          <div className="connectionButton" onClick={this.handleConnectionsClick}>Connections →</div>
           <ul>
             {this.renderGuestMoments(guest)}
           </ul>

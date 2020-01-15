@@ -6,6 +6,10 @@
       display: none;
     }
 
+    ul {
+      padding-left: 1em;
+    }
+
     .fullHeightContainer {
       box-sizing: border-box;
       display: inline-block;
@@ -13,7 +17,7 @@
       overflow: scroll;
       padding: 30px;
       vertical-align: top;
-      width: 50%;
+      width: 33%;
     }
 
     %yellow, .yellow {
@@ -26,7 +30,7 @@
       font-weight: bold;
     }
 
-    .Calendar, .Display {
+    .Calendar, .Display, .Connections {
       padding: 120px 0px;
     }
 
@@ -53,8 +57,13 @@
         margin: 10px 0px;
       }
 
-      ul {
-        padding-left: 1em;
+      .connectionButton {
+        cursor: pointer;
+        width: fit-content;
+
+        &:hover {
+          @extend %yellow;
+        }
       }
 
       .guestMoment {
@@ -79,6 +88,17 @@
         &:hover {
           @extend %yellow;
           font-weight: bold;
+        }
+      }
+    }
+
+    .Connections {
+      .connectedGuest {
+        cursor: pointer;
+        width: fit-content;
+
+        &:hover {
+          @extend %black;
         }
       }
     }

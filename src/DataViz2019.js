@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Calendar from './Calendar';
 import Display from './Display';
+import Connections from './Connections';
 
 class DataViz2019 extends Component {
   constructor(props) {
@@ -13,14 +14,16 @@ class DataViz2019 extends Component {
       momentsHovered: [], // [ id, id, id ... ]
       momentsClicked: [], // [ id, id, id ... ]
       guestHovered: null, // id
-      guestClicked: null // id
+      guestClicked: null, // id
+      showConnections: false // boolean
     };
 
     this.handlers = {
       updateMomentsHovered: this.updateMomentsHovered.bind(this),
       updateMomentsClicked: this.updateMomentsClicked.bind(this),
       updateGuestHovered: this.updateGuestHovered.bind(this),
-      updateGuestClicked: this.updateGuestClicked.bind(this)
+      updateGuestClicked: this.updateGuestClicked.bind(this),
+      updateShowConnections: this.updateShowConnections.bind(this)
     }
   }
 
@@ -77,6 +80,10 @@ class DataViz2019 extends Component {
 
   updateGuestClicked(guestId) {
     this.setState({ guestClicked: guestId });
+  }
+
+  updateShowConnections(val) {
+    this.setState({ showConnections: val });
   }
 
   momentsDisplayed() {
@@ -139,6 +146,12 @@ class DataViz2019 extends Component {
           <Display
             moments={this.momentsDisplayed()}
             guest={this.guestDisplayed()}
+            appState={this.state}
+            handlers={this.handlers}
+          />
+        </div>
+        <div className="fullHeightContainer">
+          <Connections
             appState={this.state}
             handlers={this.handlers}
           />
