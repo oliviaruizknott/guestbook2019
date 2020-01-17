@@ -1,6 +1,9 @@
 .App {
   .DataViz2019 {
     font-family: monospace;
+    display: flex;
+    max-width: 1000px;
+    margin: 0px auto;
 
     ::-webkit-scrollbar {
       display: none;
@@ -37,7 +40,7 @@
     .Calendar {
       cursor: default;
       float: right;
-      min-width: fit-content;
+      min-width: 102px;
 
       .Dot {
         &.hoverable {
@@ -55,15 +58,6 @@
         border: 0.7px black solid;
         width: 120px;
         margin: 10px 0px;
-      }
-
-      .connectionButton {
-        cursor: pointer;
-        width: fit-content;
-
-        &:hover {
-          @extend %yellow;
-        }
       }
 
       .guestMoment {

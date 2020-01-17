@@ -10,6 +10,7 @@ class Connections extends Component {
 
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -25,6 +26,10 @@ class Connections extends Component {
 
   handleMouseLeave(e) {
     this.props.handlers.updateGuestHovered(null);
+  }
+
+  handleClick(e) {
+    this.props.handlers.updateGuestClicked(parseInt(e.target.id));
   }
 
   shouldHighlight(guest) {
@@ -53,6 +58,7 @@ class Connections extends Component {
           className={`connectedGuest ${black}`}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
+          onClick={this.handleClick}
         >
           {connectedGuest.name} ({connection.momentIds.length})
         </li>
@@ -68,10 +74,12 @@ class Connections extends Component {
 
   render() {
     const guest = this.state.guest;
+    if (!guest) return null;
 
     return (
       <div className="Connections">
-        <div>Connections{guest ? `: ${guest.connections.length}` : ""}</div>
+        <br/>
+        <div>Connections: {guest.connections.length}</div>
         {this.renderConnectedGuests()}
       </div>
     )

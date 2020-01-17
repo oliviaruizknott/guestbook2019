@@ -33,8 +33,6 @@ class Display extends Component {
 
   handleGuestClick(e) {
     this.props.handlers.updateGuestClicked(parseInt(e.target.id));
-    // Wipe out the hovered guest here or it will never happen
-    this.props.handlers.updateGuestHovered(null);
   }
 
   handleMomentMouseEnter(e) {
@@ -47,12 +45,9 @@ class Display extends Component {
 
   handleMomentClick(e) {
     this.props.handlers.updateMomentsClicked([parseInt(e.target.id)]);
-    // Wipe out the hovered moment here or it will never happen
-    this.props.handlers.updateMomentsHovered([]);
   }
 
   handleConnectionsClick(e) {
-    console.dir(this.props.guest.connections)
     this.props.handlers.updateShowConnections(!this.props.appState.showConnections);
   }
 
@@ -101,7 +96,6 @@ class Display extends Component {
         <div>{guest.name}</div>
         <div>
           <div>Moments: {guest.moments.length}</div>
-          <div className="connectionButton" onClick={this.handleConnectionsClick}>Connections →</div>
           <ul>
             {this.renderGuestMoments(guest)}
           </ul>

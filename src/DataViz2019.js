@@ -70,6 +70,8 @@ class DataViz2019 extends Component {
   // second argument.
   updateMomentsClicked(momentIds, clearGuests = true) {
     this.setState({ momentsClicked: momentIds });
+    // Clear out the moment hovered or it might never happen
+    this.updateMomentsHovered([]);
     // Clear out guest clicked, too
     if (clearGuests) this.updateGuestClicked(null);
   }
@@ -80,6 +82,8 @@ class DataViz2019 extends Component {
 
   updateGuestClicked(guestId) {
     this.setState({ guestClicked: guestId });
+    // Clear out the guest hovered or it might never happen
+    this.updateGuestHovered(null);
   }
 
   updateShowConnections(val) {
