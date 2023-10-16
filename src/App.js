@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import DataViz2019 from './DataViz2019';
-import './App.scss';
+import './App.css';
 
 class App extends Component {
   render() {

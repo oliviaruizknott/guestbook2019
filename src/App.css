@@ -1,0 +1,69 @@
+.App .DataViz2019 {
+  font-family: monospace;
+  display: flex;
+  max-width: 1000px;
+  margin: 0px auto;
+}
+.App .DataViz2019 ::-webkit-scrollbar {
+  display: none;
+}
+.App .DataViz2019 ul {
+  padding-left: 1em;
+}
+.App .DataViz2019 .fullHeightContainer {
+  box-sizing: border-box;
+  display: inline-block;
+  height: calc(100vh);
+  overflow: scroll;
+  padding: 30px;
+  vertical-align: top;
+  width: 33%;
+}
+.App .DataViz2019 .Display .close:hover, .App .DataViz2019 .yellow {
+  background-color: yellow;
+}
+.App .DataViz2019 .Display .guestMoment:hover, .App .DataViz2019 .Connections .connectedGuest:hover, .App .DataViz2019 .black {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+.App .DataViz2019 .Calendar, .App .DataViz2019 .Display, .App .DataViz2019 .Connections {
+  padding: 120px 0px;
+}
+.App .DataViz2019 .Calendar {
+  cursor: default;
+  float: right;
+  min-width: 102px;
+}
+.App .DataViz2019 .Calendar .Dot.hoverable {
+  cursor: pointer;
+}
+.App .DataViz2019 .Calendar .Dot.hoverable:hover {
+  font-weight: bold;
+}
+.App .DataViz2019 .Display hr {
+  border: 0.7px black solid;
+  width: 120px;
+  margin: 10px 0px;
+}
+.App .DataViz2019 .Display .guestMoment {
+  cursor: pointer;
+  width: fit-content;
+}
+.App .DataViz2019 .Display .momentGuest {
+  cursor: pointer;
+  width: fit-content;
+}
+.App .DataViz2019 .Display .close {
+  cursor: pointer;
+  margin-top: 10px;
+  width: fit-content;
+}
+.App .DataViz2019 .Display .close:hover {
+  font-weight: bold;
+}
+.App .DataViz2019 .Connections .connectedGuest {
+  cursor: pointer;
+  width: fit-content;
+}
+ 
