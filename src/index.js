@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import AppStoreDistributed from './haxademic/app-store-distributed';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+new AppStoreDistributed(`ws://livvy-dev.local:${8082}`);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
