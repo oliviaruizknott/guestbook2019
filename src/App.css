@@ -66,4 +66,20 @@
   cursor: pointer;
   width: fit-content;
 }
- 
+
+/* Mobile */
+
+.App .Mobile {
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+}
+
+.App .Mobile p {
+  font-weight: bold;
+  max-width: 75%;
+}

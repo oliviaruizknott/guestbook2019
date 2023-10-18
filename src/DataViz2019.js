@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Calendar from './Calendar';
 import Display from './Display';
 import Connections from './Connections';
-import AppStoreDebug from './components/debug/AppStoreDebug';
 
 class DataViz2019 extends Component {
   constructor(props) {
@@ -35,6 +34,12 @@ class DataViz2019 extends Component {
 
     const guests = require('./guests');
     this.setState({ guestsIndex: guests }, this.setGuest);
+
+    window._store.addListener(this, "GUEST");
+  }
+
+  GUEST(val) {
+    this.setGuest(val);
   }
 
   // Converts the dates from the server (ruby) into javascript
@@ -47,8 +52,9 @@ class DataViz2019 extends Component {
     return moments;
   }
 
-  setGuest() {
-    const name = this.props.location.hash.replace("#","");
+  setGuest(guestName=null) {
+    const name = guestName || this.props.location.hash.replace("#","");
+
     if (name) {
       const guests = this.state.guestsIndex;
       const guest = Object.keys(guests).find((guestId) => {
@@ -141,7 +147,6 @@ class DataViz2019 extends Component {
   render() {
     return (
       <div className="DataViz2019">
-        <AppStoreDebug />
         <div className="fullHeightContainer">
           <Calendar
             appState={this.state}

@@ -149,7 +149,13 @@ class Display extends Component {
       )
     }
 
-    return "← hover over a #"
+    return (
+      <>
+        <div>← hover over a #</div>
+        <br/>
+        <div>or: tap a photo with your phone</div>
+      </>
+    )
   }
 
   renderClose() {
