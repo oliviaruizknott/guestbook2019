@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import QRCodeReact from "./components/QRCodeReact";
 
 const MOMENT = "moment";
 const GUEST = "guest";
@@ -18,9 +19,9 @@ class Display extends Component {
   }
 
   handleCloseClick(e) {
-    this.props.guest ?
-      this.props.handlers.updateGuestClicked(null) :
-      this.props.handlers.updateMomentsClicked([]);
+    this.props.guest
+      ? this.props.handlers.updateGuestClicked(null)
+      : this.props.handlers.updateMomentsClicked([]);
   }
 
   handleGuestMouseEnter(e) {
@@ -48,7 +49,9 @@ class Display extends Component {
   }
 
   handleConnectionsClick(e) {
-    this.props.handlers.updateShowConnections(!this.props.appState.showConnections);
+    this.props.handlers.updateShowConnections(
+      !this.props.appState.showConnections
+    );
   }
 
   checkHighlight(type, object) {
@@ -61,8 +64,14 @@ class Display extends Component {
     if (type === MOMENT) {
       // A moment is highlighted if it’s hovered, or if a guest that was at this
       // moment is hovered.
-      return (appState.momentsHovered && appState.momentsHovered.includes(object.id)) ||
-        (appState.guestHovered && appState.guestsIndex[appState.guestHovered].moment_ids.includes(object.id));
+      return (
+        (appState.momentsHovered &&
+          appState.momentsHovered.includes(object.id)) ||
+        (appState.guestHovered &&
+          appState.guestsIndex[appState.guestHovered].moment_ids.includes(
+            object.id
+          ))
+      );
     }
   }
 
@@ -70,7 +79,7 @@ class Display extends Component {
     if (guest.moments && guest.moments.length > 0) {
       return guest.moments.map((moment) => {
         if (!moment) return null;
-        const dateString = moment.date.toDateString().replace(' 2019', '');
+        const dateString = moment.date.toDateString().replace(" 2019", "");
         const black = this.checkHighlight(MOMENT, moment) ? "black" : "";
 
         return (
@@ -84,8 +93,8 @@ class Display extends Component {
           >
             {dateString} — {moment.title || moment.moment_type}
           </li>
-        )
-      })
+        );
+      });
     }
   }
 
@@ -96,12 +105,10 @@ class Display extends Component {
         <div>{guest.name}</div>
         <div>
           <div>Moments: {guest.moments.length}</div>
-          <ul>
-            {this.renderGuestMoments(guest)}
-          </ul>
+          <ul>{this.renderGuestMoments(guest)}</ul>
         </div>
       </div>
-    )
+    );
   }
 
   renderMomentGuests(moment) {
@@ -120,8 +127,8 @@ class Display extends Component {
           >
             {guest.name}
           </li>
-        )
-      })
+        );
+      });
     }
   }
 
@@ -130,13 +137,11 @@ class Display extends Component {
       const moments = this.props.moments.map((moment, i) => {
         return (
           <div key={i} className="moment">
-            { moment.title || moment.moment_type }
-            <ul>
-              {this.renderMomentGuests(moment)}
-            </ul>
-            { i >= this.props.moments.length - 1 ? "" : <hr/> }
+            {moment.title || moment.moment_type}
+            <ul>{this.renderMomentGuests(moment)}</ul>
+            {i >= this.props.moments.length - 1 ? "" : <hr />}
           </div>
-        )
+        );
       });
 
       return (
@@ -146,16 +151,29 @@ class Display extends Component {
           </div>
           {moments}
         </div>
-      )
+      );
     }
 
     return (
       <>
-        <div>← hover over a #</div>
-        <br/>
-        <div>or: tap a photo with your phone</div>
+        <div>
+          <b>Guestbook 2019</b>
+        </div>
+        <br />
+        <div>
+          The guests and moments of 2019 in the Ruiz-Knott household,
+          visualized.
+        </div>
+        <br />
+        {!this.props.nfc && <div>← hover over a #</div>}
+        {this.props.nfc && (
+          <>
+            <div>Scan this:</div>
+            <QRCodeReact link={"http://livvy-dev.local:3000/nfc/"} />
+          </>
+        )}
       </>
-    )
+    );
   }
 
   renderClose() {
@@ -166,20 +184,24 @@ class Display extends Component {
       appState.guestClicked
     ) {
       return (
-        <div className="close" onClick={this.handleCloseClick}>x </div>
-      )
+        <div className="close" onClick={this.handleCloseClick}>
+          x{" "}
+        </div>
+      );
     }
   }
 
   render() {
-    const content = this.props.guest ? this.renderGuest() : this.renderMoments();
+    const content = this.props.guest
+      ? this.renderGuest()
+      : this.renderMoments();
 
     return (
       <div className="Display">
         {content}
         {this.renderClose()}
       </div>
-    )
+    );
   }
 }
 
